@@ -27,7 +27,11 @@ if (isDeveloping) {
 
 	app.use(middleware);
 	app.use(webpackHotMiddleware(compiler));
-	app.get('*',function response(req, res) {
+  app.get('/index-h5.html',function response(req, res) {
+    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index-h5.html')));
+    res.end();
+  });
+	app.get('/index.html',function response(req, res) {
 		res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
 		res.end();
 	});

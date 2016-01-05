@@ -1,10 +1,10 @@
 import React from 'react';
 import {run, Route, DefaultRoute, RouteHandler} from 'react-router';
 import ReactDOM from 'react-dom';
-import Login from './login/Login.js';
-import Home from './home/Home.js';
+import Login from './login/Login-h5.js';
+import Home from './home/Home-h5.js';
 
-import './app.less';
+import appStyleH5 from './app-h5.less';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +15,6 @@ class App extends React.Component {
       }
     };
   }
-
   render() {
     return (<RouteHandler />);
   }
@@ -23,14 +22,14 @@ class App extends React.Component {
 
 const routes = (
   <Route name="app" path="/" handler={App}>
-    <DefaultRoute name="login" handler={Login}/>
-    <Route name="home" handler={Home}/>
+    <DefaultRoute name="login" handler={Login} />
+    <Route name="home" handler={Home} />
   </Route>
 );
 
 document.addEventListener('DOMContentLoaded', function () {
   run(routes,
     function (Handler) {
-      ReactDOM.render(<Handler />, document.getElementById('root'));
+      ReactDOM.render(<Handler />, document.getElementById('h5-root'));
     });
 });
