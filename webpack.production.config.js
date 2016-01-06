@@ -15,7 +15,7 @@ var modulePath = {
 module.exports = {
   entry: {
     browser: path.join(__dirname, 'app/App.js'),
-    ieCompatible: path.join(__dirname, 'app/App.js'),
+    ieCompatible: path.join(__dirname, 'app/utils/ie-compatible.js'),
     mobile: path.join(__dirname, 'app/App-h5.js')
   },
   output: {
@@ -30,9 +30,8 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
-      inject: 'body',
       filename: 'index.html',
-      chunks: ["browser"]
+      chunks: ["browser", "ieCompatible"]
     }),
     new HtmlWebpackPlugin({
       template: 'app/index-h5.html',

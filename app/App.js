@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Login from './login/Login.js';
 import Home from './home/Home.js';
 
+var docReady = require("exports?docReady!../lib/docready/docready");
 import './app.less';
 
 class App extends React.Component {
@@ -28,9 +29,16 @@ const routes = (
   </Route>
 );
 
-document.addEventListener('DOMContentLoaded', function () {
+docReady(function () {
   run(routes,
     function (Handler) {
       ReactDOM.render(<Handler />, document.getElementById('root'));
     });
 });
+
+//document.addEventListener('DOMContentLoaded', function () {
+//  run(routes,
+//    function (Handler) {
+//      ReactDOM.render(<Handler />, document.getElementById('root'));
+//    });
+//});

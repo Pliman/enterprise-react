@@ -11,6 +11,7 @@ module.exports = {
       'webpack-hot-middleware/client?reload=true',
       path.join(__dirname, 'app/App.js')
     ],
+    ieCompatible: path.join(__dirname, 'app/utils/ie-compatible.js'),
     mobile: [
       'webpack-hot-middleware/client?reload=true',
       path.join(__dirname, 'app/App-h5.js')
@@ -24,9 +25,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.html',
-      inject: 'body',
       filename: 'index.html',
-      chunks: ["browser"]
+      chunks: ["browser", "ieCompatible"]
     }),
     new HtmlWebpackPlugin({
       template: 'app/index-h5.html',
