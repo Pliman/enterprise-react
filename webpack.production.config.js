@@ -16,7 +16,8 @@ module.exports = {
   entry: {
     browser: path.join(__dirname, 'app/App.js'),
     ieCompatible: path.join(__dirname, 'app/utils/ie-compatible.js'),
-    mobile: path.join(__dirname, 'app/App-h5.js')
+    mobile: path.join(__dirname, 'app/App-h5.js'),
+    common: ['react', 'react-router']
   },
   output: {
     path: path.join(__dirname, '/dist/'),
@@ -28,16 +29,17 @@ module.exports = {
   plugins: [
     new clean(['dist']),
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
-      chunks: ["browser", "ieCompatible"]
+      chunks: ['common', 'browser', 'ieCompatible']
     }),
     new HtmlWebpackPlugin({
       template: 'app/index-h5.html',
       inject: 'body',
       filename: 'index-h5.html',
-      chunks: ["mobile"]
+      chunks: ['common', 'mobile']
     }),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
@@ -63,10 +65,10 @@ module.exports = {
       loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
     }, {
       test: /\.less$/,
-      loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
     }, {
       test: /\.(woff(2)?|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "file-loader"
+      loader: 'file-loader'
     }, {
       test: /\.(png|jpg|jpeg|gif)$/,
       loader: 'file-loader?name=i/[name].[ext]'

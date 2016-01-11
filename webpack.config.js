@@ -27,13 +27,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
-      chunks: ["browser", "ieCompatible"]
+      chunks: ['browser', 'ieCompatible']
     }),
     new HtmlWebpackPlugin({
       template: 'app/index-h5.html',
       inject: 'body',
       filename: 'index-h5.html',
-      chunks: ["mobile"]
+      chunks: ['mobile']
     }),
     new ExtractTextPlugin('[name].css'),
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -56,10 +56,10 @@ module.exports = {
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }, {
       test: /\.less$/,
-      loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader')
     }, {
       test: /\.(woff(2)?|eot|ttf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-      loader: "file-loader"
+      loader: 'file-loader'
     }, {
       test: /\.(png|jpg|jpeg|gif)$/,
       loader: 'file-loader?name=i/[name].[ext]'
