@@ -29,7 +29,11 @@ module.exports = {
   plugins: [
     new clean(['dist']),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('common', 'common-[hash].min.js'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common-[hash].min.js',
+      chunks: ['browser', 'mobile']
+    }),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
@@ -44,8 +48,7 @@ module.exports = {
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        warnings: false,
-        screw_ie8: true
+        warnings: false
       }
     }),
     new webpack.DefinePlugin({
