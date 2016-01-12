@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new clean(['dist']),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
+    new webpack.optimize.CommonsChunkPlugin('common', 'common-[hash].min.js'),
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       filename: 'index.html',
