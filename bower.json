@@ -1,0 +1,26 @@
+/**
+ * npm不支持的包才用bower
+ */
+{
+  "name": "enterprise-react",
+  "description": "enterprise-react",
+  "authors": [
+    "Pliman"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Pliman/enterprise-react",
+  "dependencies": {
+  },
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
