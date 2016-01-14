@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router';
 import styles from './login.less';
 
 export default class Login extends React.Component {
@@ -21,7 +22,7 @@ export default class Login extends React.Component {
             <input type="password" className="form-control" id="password"
                    placeholder="Password"/>
           </div>
-          <button type="submit" className="btn btn-default">Submit</button>
+          <Link className="btn btn-default" to="home">submit</Link>
         </form>
       </div>
     );
