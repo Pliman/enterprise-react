@@ -6,12 +6,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var clean = require('clean-webpack-plugin');
 
-var nodeModulesPath = path.join(__dirname, 'node_modules');
-var modulePath = {
-  React: path.join(nodeModulesPath, 'react/dist/react.min.js'),
-  React_addons: path.join(nodeModulesPath, 'react/dist/react-with-addons.min.js')
-};
-
 module.exports = {
   entry: {
     browser: path.join(__dirname, 'app/App.js'),
@@ -75,8 +69,7 @@ module.exports = {
     }, {
       test: /\.(png|jpg|jpeg|gif)$/,
       loader: 'file-loader?name=i/[name].[ext]'
-    }],
-    noParse: [modulePath.React, modulePath.React_addons]
+    }]
   },
   postcss: [
     require('autoprefixer')
