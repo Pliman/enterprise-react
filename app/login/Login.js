@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import styles from './login.less';
+import './login.less';
 
 export default class Login extends React.Component {
   constructor(props) {
