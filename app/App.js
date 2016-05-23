@@ -2,6 +2,7 @@ import React from 'react';
 import {run, Route, DefaultRoute, RouteHandler} from 'react-router';
 import ReactDOM from 'react-dom';
 import Login from './login/Login.js';
+import Register from './register/Register.js';
 import Home from './home/Home.js';
 
 const docReady = require('exports?docReady!../lib/docready/docready');
@@ -26,6 +27,7 @@ const routes = (
   <Route name="app" path="/" handler={App}>
     <DefaultRoute name="login" handler={Login}/>
     <Route name="home" handler={Home}/>
+    <Route name="register" handler={Register}/>
   </Route>
 );
 

@@ -1,0 +1,4 @@
+{
+  "plugins": ["transform-decorators-legacy", "transform-object-assign"],
+  "presets": ["es2015", "stage-0", "react"]
+}
