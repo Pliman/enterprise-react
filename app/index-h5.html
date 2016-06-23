@@ -10,5 +10,10 @@
   </head>
   <body>
     <div id="h5-root"></div>
+    <% if(htmlWebpackPlugin.files.webpackManifest){ %>
+    <script>
+      <%=htmlWebpackPlugin.files.webpackManifest%>
+    </script>
+    <% } %>
   </body>
 </html>

@@ -14,6 +14,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "tar -cvf node_modules.tar node_modules/ && bunzip2 -z node_modules.tar",
+    "deploy": "bunzip2 node_modules.tar.bz2 && tar -xvf node_modules.tar && rm -f node_modules.tar",
     "start": "babel-node server",
     "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
@@ -54,8 +56,9 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.5",
     "formsy-react": "^0.17.0",
-    "html-webpack-plugin": "^1.6.1",
+    "html-webpack-plugin": "^2.17.0",
     "imports-loader": "^0.6.5",
+    "inline-manifest-webpack-plugin": "^2.1.0",
     "jscs": "^2.1.1",
     "jsdom": "^6.5.1",
     "json-loader": "^0.5.3",
@@ -87,3 +90,4 @@
     "webpack-hot-middleware": "^2.7.1"
   }
 }
+

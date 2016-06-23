@@ -3,6 +3,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var clean = require('clean-webpack-plugin');
 
@@ -15,7 +16,7 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, '/dist/'),
-    filename: '[name]-[hash].min.js'
+    filename: '[name]-[chunkhash].min.js'
   },
   resolve: {
     modulesDirectories: ['node_modules'],
@@ -25,21 +26,40 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
-      filename: 'common-[hash].min.js',
+      filename: 'common-[chunkhash].min.js',
       chunks: ['browser', 'mobile']
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      filename: 'manifest-[chunkhash].min.js',
+      chunks: ['common']
+    }),
     new HtmlWebpackPlugin({
+      inject: false,
       template: 'app/index.html',
       filename: 'index.html',
-      chunks: ['common', 'browser', 'ieCompatible']
+      chunks: ['common', 'browser', 'ieCompatible'],
+      chunksSortMode: function(chunk1, chunk2){
+        return chunk1.id - chunk2.id;
+      },
+      minify: {
+        collapseWhitespace: true,
+        processConditionalComments: true
+      }
     }),
     new HtmlWebpackPlugin({
       template: 'app/index-h5.html',
-      inject: 'body',
       filename: 'index-h5.html',
-      chunks: ['common', 'mobile']
+      chunks: ['common', 'mobile'],
+      chunksSortMode: function(chunk1, chunk2){
+        return chunk1.id - chunk2.id;
+      },
+      minify: {
+        collapseWhitespace: true
+      }
     }),
-    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new InlineManifestWebpackPlugin(),
+    new ExtractTextPlugin('[name]-[contenthash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         warnings: false
